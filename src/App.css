@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f7f1eb;
+}
+
+.sections {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.logo-button {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  border: solid #ffcc00 2px;
+  border-radius: 20px;
+  filter: drop-shadow(2px 2px 4px #000000);
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+}
+
+
+
+
+.form-container, .previous-entries-container {
+  margin: 20px;
+  border: solid #ffcc00 2px;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: white;
+  filter: drop-shadow(2px 2px 4px #000000);
+}
+
+h2, h3 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+ul {
+  list-style: none;
+}
+
+
+.form-part {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 2rem;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 2rem;
+  border: solid black 2px;
+  border-radius: 10px;
+}
+
+.form-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 600px;
+  height: 60px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffcc00;
+  cursor: pointer;
+}
+
+.back-button, .home-button {
+  padding: 18px 24px;
+  margin: 10px 0px 0px 10px;
+  font-size: 1rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffcc00;
+  cursor: pointer;
+}
+
+.edit-buttons {
+  width: 600px;
+  height: 60px;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffcc00;
+  cursor: pointer;
+}
+
+
+.entries-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+
+.entry {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  transition: box-shadow 0.2s ease;
+}
+
+.entry:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.entry strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.entry button {
+  background: #ffcc00;
+  color: black;
+  border: none;
+  padding: 6px 14px;
+  margin-top: 10px;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
+
+.entry button:hover {
+  background: #d6ab00;
+}
+
+.entry button:nth-of-type(2) {
+  background: #dc3545;
+}
+
+.entry button:nth-of-type(2):hover {
+  background: #a71d2a;
+}
