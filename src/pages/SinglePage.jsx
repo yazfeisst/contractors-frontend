@@ -13,7 +13,6 @@ const SinglePage = () => {
     paramCompanyName ? decodeURIComponent(paramCompanyName) : ''
   );
 
-  
   const [contractorName, setContractorName] = useState('');
   const [date, setDate] = useState('');
   const [timeIn, setTimeIn] = useState('');
@@ -24,11 +23,9 @@ const SinglePage = () => {
   const [comments, setComments] = useState('');
   const [error, setError] = useState(null);
 
-  
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({});
 
-  
   useEffect(() => {
     const fetchEntries = async () => {
       try {
@@ -43,7 +40,6 @@ const SinglePage = () => {
       fetchEntries();
     }
   }, [baseURL, dispatch, entries.length]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +61,6 @@ const SinglePage = () => {
       const response = await axios.post(`${baseURL}/api/entries`, newEntry);
       dispatch({ type: 'CREATE_ENTRY', payload: response.data });
 
-     
       setContractorName('');
       setDate('');
       setTimeIn('');
@@ -79,28 +74,22 @@ const SinglePage = () => {
     }
   };
 
-  
-const handleDelete = async (id) => {
-  const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
-  if (!confirmDelete) return;
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
+    if (!confirmDelete) return;
 
-  try {
-    await axios.delete(`${baseURL}/api/entries/${id}`);
+    try {
+      await axios.delete(`${baseURL}/api/entries/${id}`);
+      const response = await axios.get(`${baseURL}/api/entries`);
+      dispatch({ type: 'SET_ENTRIES', payload: response.data });
+    } catch (err) {
+      console.error('Delete failed:', err);
+    }
+  };
 
-  
-    const response = await axios.get(`${baseURL}/api/entries`);
-    dispatch({ type: 'SET_ENTRIES', payload: response.data });
-
-
-  } catch (err) {
-    console.error('Delete failed:', err);
-  }
-};
-
- 
   const handleEditSave = async (id) => {
     try {
-      const response = await axios.patch(`${baseURL}/api/entries/${id}`, editData,);
+      const response = await axios.patch(`${baseURL}/api/entries/${id}`, editData);
       dispatch({ type: 'UPDATE_ENTRY', payload: response.data });
       setEditId(null);
       setEditData({});
@@ -122,9 +111,7 @@ const handleDelete = async (id) => {
       <div className="form-container">
         <h2>{companyName} New Entry</h2>
         <form onSubmit={handleSubmit}>
-          
-
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="contractorName">Contractor Name:</label>
             <input
               type="text"
@@ -135,7 +122,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="date">Date:</label>
             <input
               type="date"
@@ -146,7 +133,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="timeIn">Time In:</label>
             <input
               type="time"
@@ -156,7 +143,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="timeOut">Time Out:</label>
             <input
               type="time"
@@ -166,7 +153,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="work">Work Description:</label>
             <input
               type="text"
@@ -176,7 +163,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="manager">Manager Name:</label>
             <input
               type="text"
@@ -186,7 +173,7 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="initials">Initials:</label>
             <input
               type="text"
@@ -196,10 +183,10 @@ const handleDelete = async (id) => {
             />
           </div>
 
-          <div className='form-part'>
+          <div className="form-part">
             <label htmlFor="comments">Comments:</label>
             <input
-              type='text'
+              type="text"
               id="comments"
               value={comments}
               onChange={(e) => setComments(e.target.value)}
@@ -208,7 +195,7 @@ const handleDelete = async (id) => {
 
           {error && <div className="error">{error}</div>}
 
-          <button className='form-button' type="submit">Submit Entry</button>
+          <button className="form-button" type="submit">Submit Entry</button>
         </form>
       </div>
 
@@ -217,12 +204,11 @@ const handleDelete = async (id) => {
         {filteredEntries.length === 0 ? (
           <p>No entries yet.</p>
         ) : (
-          <ul className='entries-grid'>
+          <ul className="entries-grid">
             {filteredEntries.map((entry) => (
               <li key={entry._id}>
                 {editId === entry._id ? (
-                  <>
-                  <form className='entry'>
+                  <form className="entry">
                     <div className="form-row">
                       <label htmlFor={`edit-contractor-${entry._id}`}>Contractor Name:</label>
                       <input
@@ -232,7 +218,7 @@ const handleDelete = async (id) => {
                         onChange={(e) => setEditData({ ...editData, contractor_name: e.target.value })}
                       />
                     </div>
-                  
+
                     <div className="form-row">
                       <label htmlFor={`edit-date-${entry._id}`}>Date:</label>
                       <input
@@ -303,18 +289,26 @@ const handleDelete = async (id) => {
                       />
                     </div>
 
-                    <button className="edit-buttons" onClick={() => handleEditSave(entry._id)}>Save</button>
-                    <button  className="edit-buttons" onClick={() => setEditId(null)}>Cancel</button>
-                    </form>
-                  </>
-
+                    <button
+                      type="button"
+                      className="edit-buttons"
+                      onClick={() => handleEditSave(entry._id)}
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      className="edit-buttons"
+                      onClick={() => setEditId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </form>
                 ) : (
-                  <>
-                  <div className='entry'>
-                    <strong>{new Date(entry.date).toLocaleDateString('en-GB')}</strong> 
+                  <div className="entry">
+                    <strong>{new Date(entry.date).toLocaleDateString('en-GB')}</strong>
                     <br />
-                    {entry.contractor_name} (
-                    {entry.time_in || '--'} to {entry.time_out || '--'})
+                    {entry.contractor_name} ({entry.time_in || '--'} to {entry.time_out || '--'})
                     <br />
                     Work Description: {entry.work}
                     <br />
@@ -322,13 +316,28 @@ const handleDelete = async (id) => {
                     <br />
                     Comments: {entry.comments}
                     <br />
-                    <button onClick={() => {
-                      setEditId(entry._id);
-                      setEditData({ ...entry });
-                    }}>Edit</button>
-                    <button onClick={() => handleDelete(entry._id)}>Delete</button>
-                    </div>
-                  </>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditId(entry._id);
+                        setEditData({
+                          contractor_name: entry.contractor_name || '',
+                          date: entry.date || '',
+                          time_in: entry.time_in || '',
+                          time_out: entry.time_out || '',
+                          work: entry.work || '',
+                          manager: entry.manager || '',
+                          initials: entry.initials || '',
+                          comments: entry.comments || '',
+                        });
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button type="button" onClick={() => handleDelete(entry._id)}>
+                      Delete
+                    </button>
+                  </div>
                 )}
               </li>
             ))}
