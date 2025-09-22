@@ -1,7 +1,6 @@
-
 import './App.css'
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import SinglePage from './pages/SinglePage';
 import AllEntries from './pages/AllEntries';
@@ -19,4 +18,3 @@ const App = () => {
 }
 
 export default App;
-
